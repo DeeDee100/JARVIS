@@ -60,7 +60,7 @@ def user_input():
 				speak(choice(opening_text))
 				return query
 		except Exception:
-			speak('Sorry, I could not understant. Switching Language to portuguese ... ')
+			speak('Sorry, I could not understant. Repeat please.')
 			query = None
 	
 
@@ -79,10 +79,14 @@ if __name__ == '__main__':
 		elif "wikipedia" in query:
 			speak("What do you want to search on Wikipedia ?")
 			search = user_input().lower()
-			results = search_wikipedia(search)
-			speak(f"Wiki says: {results}")
-			speak("I am also printing the results on screen")
-			print(results)
+			try:
+				results = search_wikipedia(search)
+				speak(f"Wiki says: {results}")
+				speak("I am also printing the results on screen")
+				print(results)
+			except Exception as e:
+				speak("Something went wrong, check logs please.")
+				print(e)
 		elif "youtube" in query:
 			speak("What do you want to see on Youtube?")
 			video = user_input().lower()
@@ -124,12 +128,12 @@ if __name__ == '__main__':
 			print(*get_news(), sep='\n')
 			engine.setProperty('voice', voices[1].id) #swicht voice back to English
 		elif 'trending movies' in query:
-			speak(f"These are the trending movies today: {trending_movies}")
+			speak(f"These are the trending movies today: {trending_movies()}")
 			print(*trending_movies(), sep='\n')
 			
 		elif 'trending tv shows' in query:
-			speak(f"These are the trending tv shows today: {trending_series}")
+			speak(f"These are the trending tv shows today: {trending_series()}")
 			print(*trending_series(), sep='\n')
-	
+
 
 

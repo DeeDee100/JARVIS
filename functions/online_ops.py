@@ -54,7 +54,7 @@ def trending_movies():
 	return trending_movies
 
 def trending_series():
-	trending_series =[]
+	trending_series = []
 	res = requests.get(f"https://api.themoviedb.org/3/trending/tv/day?api_key={TMDB_API_KEY}").json()
 	results = res['results']
 	for r in results:
